@@ -8,10 +8,11 @@ function Item({ data }) {
   for (const [key, value] of Object.entries(data)) {
     if (key !== 'breed') {
       total += value;
+      const stars = Array(value).fill('⭐️');
       attributes.push(
       <View style={styles.attr} key={`${data.breed}${key}`}>
         <Text>{key}</Text>
-        <Text>{value}</Text>
+        <Text>{stars}</Text>
       </View>
       )
     }
