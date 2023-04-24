@@ -10,6 +10,8 @@ function Item({ data, navigation }) {
     }
   }
 
+  const avg = (total / (Object.keys(data).length - 1)).toFixed(1)
+
 	return (
     <TouchableHighlight
     onPress={() =>
@@ -19,7 +21,7 @@ function Item({ data, navigation }) {
     }
   >
       <View style={styles.container}>
-        <Text style={styles.title}>{data.breed} {(total / Object.keys(data).length - 1).toFixed(1)}</Text>
+        <Text style={styles.title}>{data.breed} {avg}</Text>
       </View>
     </TouchableHighlight>
 	);
