@@ -1,28 +1,27 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Button, TouchableHighlight } from 'react-native'
 
-function Item({ data }) {
-  const attributes = [];
+function Item({ data, navigation }) {
   let total = 0;
 
   for (const [key, value] of Object.entries(data)) {
     if (key !== 'breed') {
       total += value;
-      const stars = Array(value).fill('⭐️');
-      attributes.push(
-      <View style={styles.attr} key={`${data.breed}${key}`}>
-        <Text>{key}</Text>
-        <Text>{stars}</Text>
-      </View>
-      )
     }
   }
 
 	return (
-		<View style={styles.container}>
-			<Text style={styles.title}>{data.breed} {(total / Object.keys(data).length - 1).toFixed(1)}</Text>
-      {attributes}
-		</View>
+    <TouchableHighlight
+    onPress={() =>
+      navigation.push('Details', {
+      data: data,
+      })
+    }
+  >
+      <View style={styles.container}>
+        <Text style={styles.title}>{data.breed} {(total / Object.keys(data).length - 1).toFixed(1)}</Text>
+      </View>
+    </TouchableHighlight>
 	);
 }
 
@@ -32,7 +31,7 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#fff',
     justifyContent: 'center',
-    padding: 30,
+    padding: 20,
     borderBottomColor: 'green',
     borderBottomWidth: 1,
   },
@@ -41,7 +40,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignItems: 'flex-start',
     fontSize: 20,
-    padding: 4,
   }, 
   attr: {
     display: 'flex',
